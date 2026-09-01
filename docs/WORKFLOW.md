@@ -10,17 +10,23 @@ project memory; conversations and agent sessions are temporary working context.
 Project-specific rules and evidence remain in the consumer repository according
 to its local `AGENTS.md` and documentation contract.
 
+The self-contained managed contract defines consumer-agent obligations. This
+workflow develops that contract through explanation, recommendations, and
+examples; it does not silently add mandatory consumer behavior.
+
 ## 1. Authority and work state
 
-`main` is the authoritative published baseline and persistent shared state of a
-project. New work normally starts from its current state.
+The repository's designated published or default integration branch (typically
+`main`) is the authoritative shared baseline for completed work. New work
+normally starts from its current state.
 
 There is one important continuity rule: when a task explicitly continues an
 open pull request, the identified PR head is the authoritative continuation
 point for that in-progress task. The work MUST be continued there rather than
-reconstructed from `main`. Arbitrary local or unversioned state is not
-authoritative merely because it exists. After the PR is merged, `main` again
-provides the published authority for the incorporated work.
+reconstructed from the published baseline. Arbitrary local or unversioned state
+is not authoritative merely because it exists. After the PR is merged, the
+designated published baseline again contains the authoritative incorporated
+state.
 
 This distinction preserves both a stable shared baseline and unfinished work
 that has already acquired an explicit review boundary.
@@ -32,7 +38,8 @@ versioned documentation and Git without relying on unrecorded conversational
 memory. Before proposing or implementing a change:
 
 1. identify the repository, current commit and branch, and working-tree state;
-2. determine whether the task starts from `main` or continues an identified PR;
+2. determine whether the task starts from the published baseline or continues
+   an identified PR;
 3. read the authoritative governance and context documents;
 4. inspect the relevant implementation and recent versioned changes;
 5. identify the current objective, frozen decisions, and unresolved blockers;
@@ -41,15 +48,15 @@ memory. Before proposing or implementing a change:
 There is no universal project file list. The repository's local `AGENTS.md` and
 documentation contract define which project-specific sources are authoritative.
 A task prompt should describe the requested delta rather than restate that whole
-contract, but it must still provide the objective, scope, any branch or PR
+contract, while still providing the objective, scope, any branch or PR
 continuity requirement, and task-specific evidence or constraints unavailable
 in the repository.
 
 ## 3. Collaboration roles
 
 - **Human/operator:** owns intent and authorization, selects priorities,
-  supplies unavailable business or domain context, and decides whether to merge
-  consequential changes.
+  supplies unavailable business or domain context, and owns or delegates merge
+  authorization for consequential changes.
 - **Reviewer/planning agent:** reconstructs project state, helps scope work,
   prepares self-contained task instructions when useful, reviews changes
   against repository authority, and identifies regressions, contradictions,
@@ -79,22 +86,22 @@ mandatory ceremony for every trivial edit.
 
 ## 5. Task and pull-request boundaries
 
-Prefer one coherent principal technical, architectural, methodological,
-documentation, or governance change per PR, together with its directly
-necessary tests and documentation. Split work when separate review boundaries
-provide real value; do not create micro-PRs that add no review benefit.
-Unrelated adjacent work stays out of scope.
+A PR should normally contain one coherent principal technical, architectural,
+methodological, documentation, or governance change, together with its directly
+necessary tests and documentation. Separate PRs are useful when distinct review
+boundaries provide real value, but micro-PRs add no benefit. Unrelated adjacent
+work should stay out of scope.
 
 Continuation of an existing PR means updating that PR, not recreating the same
-work from `main` or opening a replacement. A task may identify follow-up work
-without absorbing it into the current PR.
+work from the published baseline or opening a replacement. A task may identify
+follow-up work without absorbing it into the current PR.
 
 ## 6. Branch and PR continuity
 
-A branch name is evidence about a checkout, but it is not sufficient identity.
-Cloud or other managed environments may check out an existing PR head under a
-generic local branch name. For continuation work, establish identity from the
-available evidence, including:
+A branch name is useful evidence about a checkout, but not sufficient identity
+by itself. Cloud or other managed environments may check out an existing PR
+head under a generic local branch name. For continuation work, identity can be
+assessed from the available evidence, including:
 
 - the current commit SHA;
 - the PR head SHA, when available;
@@ -114,24 +121,25 @@ than modify a different state or manufacture a reconstruction.
 ## 7. Execution environment and repository boundaries
 
 Cloud execution is generally appropriate for work contained in one repository.
-Use local or CLI execution when the task genuinely requires simultaneous access
-to multiple repositories, unavailable local files or external artifacts, local
-hardware or services, or capabilities the cloud environment cannot provide.
-Sibling repositories remain independent unless an explicit architecture says
-otherwise; transfer necessary knowledge through a self-contained task rather
-than copying sibling code, files, or methodology by default.
+Local or CLI execution is preferable when the task genuinely requires
+simultaneous access to multiple repositories, unavailable local files or
+external artifacts, local hardware or services, or capabilities the cloud
+environment cannot provide. Sibling repositories remain independent unless an
+explicit architecture says otherwise; a self-contained task can transfer
+necessary knowledge without copying sibling code, files, or methodology by
+default.
 
-Treat network access as a capability, not a default assumption. Work offline
-when sufficient, and enable Internet access only when the task needs it.
-Installing dependencies and granting unrestricted network access are separate
-concerns. A network or provider failure is an environment limitation until
-independent evidence shows otherwise; it does not by itself invalidate a method
-or implementation.
+Network access is best treated as a capability, not a default assumption.
+Offline work is preferred when sufficient, with Internet access used when the
+task needs it. Installing dependencies and granting unrestricted network access
+are separate concerns. A network or provider failure is an environment
+limitation until independent evidence shows otherwise; it does not by itself
+invalidate a method or implementation.
 
 ## 8. Blockers and ambiguity
 
-Stop when proceeding safely would require missing authority or invention, for
-example when:
+The common operating contract requires a blockage rather than fabricated or
+unauthorized work. Conditions that warrant such a report include:
 
 - required authoritative evidence is unavailable;
 - the expected PR or task state cannot be identified safely;
@@ -140,10 +148,10 @@ example when:
 - exact required behavior would be replaced by an invented approximation; or
 - the scope would need material expansion.
 
-Do not stop for minor ambiguity that existing rules resolve safely. As required
-by the common operating contract, a blocker report identifies what is blocked,
-why, what was checked, what remains unknown, and what was deliberately not
-modified. Independent work MAY proceed when it remains safe and in scope.
+Minor ambiguity that existing rules resolve safely need not block work. As
+required by the common operating contract, a blocker report identifies what is
+blocked, why, what was checked, what remains unknown, and what was deliberately
+not modified. Independent work MAY proceed when it remains safe and in scope.
 
 ## 9. Validation and completion
 
@@ -171,8 +179,8 @@ required. Distributed rules MUST NOT change silently outside Git history.
 ## 10. Governance without ceremony
 
 Governance exists to reduce repeated mistakes and cognitive load, not to create
-preventive bureaucracy. Do not require documents without useful content,
+preventive bureaucracy. Prefer not to add documents without useful content,
 artificial gates, mandatory experiments, unnecessary approval chains, needless
-PR splitting, or infrastructure without a current use case. Add process only
-for a concrete need in reproducibility, implementation safety, reviewability,
-methodology, or maintainability.
+PR splitting, or infrastructure without a current use case. Additional process
+is useful when it serves a concrete need in reproducibility, implementation
+safety, reviewability, methodology, or maintainability.
