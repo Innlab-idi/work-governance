@@ -5,12 +5,14 @@ Scope: organization
 Source: work-governance
 
 This is the primary source for the common operating contract. The mandatory
-baseline cannot be weakened by project instructions or an ordinary task;
-projects may make it stricter. Explicit normative project constraints may
-replace common defaults where the baseline permits variation. A task defines
-the objective and scope within applicable rules; it does not silently override
-them. Follow the expanded process in [`docs/WORKFLOW.md`](docs/WORKFLOW.md) and
-the document semantics in [`docs/DOCUMENTATION.md`](docs/DOCUMENTATION.md).
+baseline cannot be weakened by project instructions or a task; projects may
+make it stricter. Explicit normative project constraints may replace common
+defaults where the baseline permits variation. A task defines the objective
+and scope within applicable rules; it does not override the mandatory baseline.
+It may satisfy only a condition or authorization that a rule expressly
+contemplates. Follow the expanded process in
+[`docs/WORKFLOW.md`](docs/WORKFLOW.md) and the document semantics in
+[`docs/DOCUMENTATION.md`](docs/DOCUMENTATION.md).
 
 ## Before changing files
 
@@ -54,7 +56,8 @@ git status --short --branch
   broad cosmetic changes, or unrelated features. Auxiliary changes MAY be made
   when reasonably necessary for a correct result.
 - MUST run available checks relevant to the change and SHOULD broaden testing
-  when risk warrants it. Report checks that could not run.
+  when risk warrants it. Distinguish checks that passed, failed, or were not
+  run, and report limitations or discrepancies.
 - MUST keep relevant documentation consistent with the software, without
   adding documentation merely to repeat the obvious. Record consequential
   architectural, methodological, or contractual decisions, not trivial detail.
@@ -63,3 +66,6 @@ git status --short --branch
 - A blockage report MUST identify the blocked requirement, missing evidence,
   checks performed, and work deliberately left unchanged. MUST NOT hide a
   blockage behind a fabricated implementation.
+- Before finishing, MUST review the relevant final diff and follow the
+  repository's established PR, review, and merge process. MUST NOT claim a
+  commit, push, PR, or merge occurred unless it actually occurred.

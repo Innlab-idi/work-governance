@@ -28,8 +28,9 @@ contract. `work-governance` remains its canonical source.
   or sensitive data that should not be stored in the repository.
 
 Projects may strengthen but MUST NOT weaken this baseline. A task defines the
-objective and scope within applicable rules; it does not silently override
-them. It may satisfy a condition a rule expressly permits.
+objective and scope within applicable rules; it does not override the mandatory
+baseline. It may satisfy only a condition or authorization that a rule
+expressly contemplates.
 
 ### Common operating defaults
 
@@ -43,13 +44,17 @@ them. It may satisfy a condition a rule expressly permits.
 - MUST keep changes focused and avoid unrelated refactors or broad cosmetic
   work. MAY make supporting changes reasonably necessary for correctness.
 - MUST run relevant available checks and SHOULD broaden them when risk warrants
-  it. Report checks that could not run.
+  it. Distinguish checks that passed, failed, or were not run, and report
+  limitations or discrepancies.
 - MUST keep affected documentation accurate and record only consequential
   architectural, methodological, or contractual decisions.
 - SHOULD favor deterministic, repeatable, inspectable processes and MUST NOT
   treat derived results as sources of truth.
 - A blockage report MUST identify the blocked requirement, missing evidence,
   checks performed, and work deliberately left unchanged.
+- Before finishing, MUST review the relevant final diff and follow the
+  repository's established PR, review, and merge process. MUST NOT claim a
+  commit, push, PR, or merge occurred unless it actually occurred.
 
 Explicit normative project constraints may replace these common defaults where
 the mandatory baseline permits variation. Silence or omission is not an
