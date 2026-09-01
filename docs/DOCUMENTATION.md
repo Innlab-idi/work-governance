@@ -10,12 +10,21 @@ create empty files.
 
 ## Status, scope, and source
 
-Use a short readable declaration near the title when semantics matter:
+Use a short readable declaration near the title when semantics matter. A
+project-owned document might declare:
 
 ```text
 Status: normative
 Scope: project
+```
+
+A managed projection declares its provenance separately:
+
+```text
+Status: normative
+Scope: organization
 Source: work-governance
+Revision: <source revision>
 ```
 
 - **Normative** content states rules, constraints, or required behavior.
@@ -23,23 +32,34 @@ Source: work-governance
   requirement.
 - **Organization** scope applies across consumers through common governance.
 - **Project** scope belongs to one consumer repository.
-- `Source: work-governance` identifies managed content originating here.
+- `Source: work-governance` identifies a managed projection originating here.
+- `Revision` identifies the Git revision used to produce or adopt that copy; it
+  is set during adoption or synchronization, not embedded in the source
+  template's own commit.
 
 Not every informal note needs metadata. Normative documents SHOULD declare
-status and scope; synchronized documents MAY also declare their source.
+status and scope. Managed projections SHOULD declare source and revision.
 
 ## Precedence and ownership
 
-When sources conflict, apply this order:
+Within the governance revision a consumer has adopted, apply this order:
 
-1. explicit project-specific constraints;
-2. common governance from `work-governance`;
-3. templates and defaults.
+1. the mandatory baseline;
+2. explicit normative project-specific constraints where variation is allowed;
+3. common operating defaults;
+4. templates and defaults not adopted as normative.
 
-An exception to common governance MUST be explicit. Silence, omission, or an
-old local copy does not constitute an override. A project owns its specific
-context and constraints; `work-governance` owns shared rules. Informative text
-cannot override normative text.
+Projects may strengthen but MUST NOT weaken the mandatory baseline. An exception
+to a common default MUST be explicit; silence or omission is not an override. A
+task defines work within applicable normative constraints rather than adding a
+new precedence layer. Informative text cannot override normative text.
+
+`work-governance` is the canonical source for shared rules. A synchronized
+managed block is a self-contained, identified projection, not an independent
+normative source. Its `Source` and `Revision` make its origin inspectable.
+Consumers may legitimately adopt different revisions; the baseline is
+non-overridable within the revision each has adopted, not a requirement to
+track the latest commit immediately.
 
 ## Document roles
 
@@ -57,9 +77,11 @@ cannot override normative text.
 ## Maintenance without duplication
 
 Give each concept one primary home. Other documents SHOULD link to that source
-and summarize only what a reader needs at that point. Do not place architecture,
-roadmap, or domain exposition in `AGENTS.md`; use it to direct readers to those
-sources. Do not copy common rules into several project documents.
+and summarize only what a reader needs at that point. The managed `AGENTS.md`
+block necessarily materializes the operational contract so a consumer remains
+self-contained, but its provenance prevents it becoming a second canonical
+source. Do not place architecture, roadmap, or domain exposition in `AGENTS.md`;
+use it to direct readers to those sources.
 
 Documentation is part of software state. Update relevant normative and
 informative descriptions when a change invalidates them, but do not edit files

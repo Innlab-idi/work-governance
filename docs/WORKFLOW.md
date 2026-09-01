@@ -16,7 +16,10 @@ task -> context review -> repository inspection -> implementation
 Read the task and the repository's `AGENTS.md` before editing. Read every
 normative document it requires, then consult descriptive context needed for the
 change. Identify assumptions and the boundary between requested work and
-possible follow-up work.
+possible follow-up work. The task sets the objective and scope within applicable
+normative constraints; it does not silently override them. An explicit task
+instruction may satisfy a condition that a rule expressly allows, such as the
+need for explicit authorization.
 
 ## 2. Inspect the repository
 
@@ -73,6 +76,13 @@ methodological, or contractual effect will meaningfully constrain future work.
 Prepare a focused commit and an accurate review summary. Include validation
 results and any remaining uncertainty. Use the repository's established PR,
 review, and merge path; do not claim merge completion until it has occurred.
+
+### Changes to shared governance
+
+Normative changes to `work-governance` MUST be recorded in Git and reviewable
+through a pull request. The change summary MUST state whether expected consumer
+behavior changes and whether consumers need resynchronization. Distributed
+rules MUST NOT change silently outside Git history.
 
 ## Blockages
 
