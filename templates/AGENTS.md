@@ -37,10 +37,19 @@ expressly contemplates.
 - Before editing, MUST identify the repository, current branch, latest commit,
   and working tree state; read all normative sources named below; and understand
   the requested scope.
-- Existing work state takes priority over starting from `main`. MUST continue a
-  named branch or PR rather than recreate it or open a replacement. If a
-  specifically required branch is unavailable, stop modifications and report
-  the blockage.
+- Existing work state takes priority over starting from the published baseline.
+  MUST continue an identified branch or PR state rather than recreate it or
+  open a replacement. Stop modifications when that state cannot be identified
+  safely or when a branch or PR that is itself the operation target is
+  unavailable.
+- A managed environment MAY expose its provisioned checkout under a generic
+  local branch name, without a local ref for the published branch or a
+  configured remote. Those conditions alone MUST NOT block work or require
+  creating or reconstructing a local `main`, `master`, or other
+  published-branch ref. A request to start from the published baseline normally
+  constrains the base state, not the local branch name. The provisioned checkout
+  MAY be used when the working tree is understood and available evidence does
+  not contradict that state identity; otherwise, stop and report the blockage.
 - MUST keep changes focused and avoid unrelated refactors or broad cosmetic
   work. MAY make supporting changes reasonably necessary for correctness.
 - MUST run relevant available checks and SHOULD broaden them when risk warrants

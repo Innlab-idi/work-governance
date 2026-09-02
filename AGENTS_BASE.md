@@ -48,10 +48,19 @@ git status --short --branch
 ## Common operating defaults
 
 - Existing work state takes priority over the convenience of starting from
-  `main`. When instructed to continue a branch or pull request, MUST continue
-  it; MUST NOT reconstruct it on another branch or open a replacement PR. If a
-  specifically required branch is unavailable, stop modifications and report
-  the blockage.
+  the published baseline. When instructed to continue an identified branch or
+  pull request, MUST continue that state; MUST NOT reconstruct it on another
+  branch or open a replacement PR. Stop modifications when that required state
+  cannot be identified safely or when a branch or PR that is itself the target
+  of the operation is unavailable.
+- Managed execution environments MAY expose a provisioned checkout under a
+  generic local branch name, without a local ref for the published branch or a
+  configured remote. Those conditions alone MUST NOT block work or require
+  creating or reconstructing a local `main`, `master`, or other published-branch
+  ref. A request to start from the published baseline normally constrains the
+  required base state, not the local branch name. The provisioned checkout MAY
+  be used when the working tree is understood and available evidence does not
+  contradict that state identity; otherwise, stop and report the blockage.
 - MUST implement the requested scope. MUST NOT add opportunistic refactors,
   broad cosmetic changes, or unrelated features. Auxiliary changes MAY be made
   when reasonably necessary for a correct result.
