@@ -17,8 +17,12 @@ examples; it does not silently add mandatory consumer behavior.
 ## 1. Authority and work state
 
 The repository's designated published or default integration branch (typically
-`main`) is the authoritative shared baseline for completed work. New work
-normally starts from its current state.
+`main`, `master`, or another repository-designated name) is the authoritative
+shared baseline for completed work. New work normally starts from its current
+state. In a managed environment, the task checkout may be a provisioned
+projection of that state under a different, generic local branch name. That
+local name neither changes the identity of the published branch nor proves the
+checkout's content identity by itself.
 
 There is one important continuity rule: when a task explicitly continues an
 open pull request, the identified PR head is the authoritative continuation
@@ -99,9 +103,21 @@ follow-up work without absorbing it into the current PR.
 ## 6. Branch and PR continuity
 
 A branch name is useful evidence about a checkout, but not sufficient identity
-by itself. Cloud or other managed environments may check out an existing PR
-head under a generic local branch name. For continuation work, identity can be
-assessed from the available evidence, including:
+by itself. Managed environments may expose either a provisioned published
+baseline or an existing PR head under a generic local branch name, potentially
+without a local published-branch ref or configured remote.
+
+For new work, a request to start from the published baseline normally specifies
+the content and state from which work begins, not the spelling of the local
+branch. The provisioned task checkout can represent that baseline when its
+working tree is understood and no available evidence contradicts that identity.
+The generic name is neither validation nor a blocker, and there is no reason to
+manufacture a local `main`, `master`, or other published-branch ref solely to
+match the designated branch's name. Lack of a remote or network access likewise
+does not require revalidating an otherwise trustworthy provisioned state.
+
+For continuation work, identity can be assessed from the available evidence,
+including:
 
 - the current commit SHA;
 - the PR head SHA, when available;
@@ -116,7 +132,11 @@ to update PR metadata also need not block safe versioned file changes.
 
 If the available checkout cannot be tied safely to the required in-progress
 state, or commit identity conflicts with unexplained local changes, stop rather
-than modify a different state or manufacture a reconstruction.
+than modify a different state or manufacture a reconstruction. The same caution
+applies to a new task when its provisioned content conflicts with the required
+baseline. When the task operates on a specific branch or PR as a Git or review
+object, rather than merely starting from its content, that object's identity and
+availability remain part of the requirement.
 
 ## 7. Execution environment and repository boundaries
 
