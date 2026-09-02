@@ -3,9 +3,11 @@
 Status: informative  
 Scope: organization
 
-This repository is the canonical source for development governance shared by a
-family of independent software repositories. It contains stable common rules,
-not the architecture, domain knowledge, or roadmap of any consumer project.
+This repository is the public, reusable baseline and canonical source for
+development governance shared by a family of independent software repositories.
+Its consumers may be public or private. This repository contains stable common
+rules, not sensitive consumer context, architecture, domain knowledge, or the
+roadmap of any consumer project.
 
 > Common where stable, local where specific.
 
@@ -40,3 +42,21 @@ may adopt the other templates when useful.
 Synchronization is not implemented. Until an explicit, reviewable sync process
 exists, adoption and updates are manual. Consumer projects remain independent
 Git repositories; they are not submodules or parts of a monorepo.
+
+## Public baseline and private extensions
+
+All content and associated metadata in this repository must be suitable for
+public disclosure. If sensitive organizational rules, internal workflows,
+private repository names, infrastructure, permissions, configuration, or
+specific automation are needed in the future, they must live in a separate
+private extension. That extension should depend conceptually on this baseline,
+must not duplicate it or become a second canonical source, and should add only
+private constraints or behavior.
+
+Neither this repository nor a future private extension may store real secrets
+in Git. Secret values belong in GitHub Secrets, Environments, or another
+appropriate secret-management system.
+
+## License
+
+This repository is available under the [MIT License](LICENSE).

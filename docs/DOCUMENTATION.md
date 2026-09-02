@@ -30,8 +30,11 @@ Revision: <source revision>
 - **Normative** content states rules, constraints, or required behavior.
 - **Informative** content explains or summarizes and does not create a
   requirement.
-- **Organization** scope applies across consumers through common governance.
-- **Project** scope belongs to one consumer repository.
+- **Organization** scope is shared governance projected to and applied by
+  consumers.
+- **Project** scope is context or rules owned by a consumer project.
+- **Repository** scope is local to the development and maintenance of one
+  repository and is not automatically projected to consumers.
 - `Source: work-governance` identifies a managed projection originating here.
 - `Revision` identifies the Git revision used to produce or adopt that copy; it
   is set during adoption or synchronization, not embedded in the source
