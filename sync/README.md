@@ -7,6 +7,11 @@ No synchronization tooling is implemented in this repository. This document
 records the intended contract so automation can be designed later without
 weakening local ownership or Git auditability.
 
+As a public baseline, `work-governance` can be read without credentials for a
+private sibling repository. Public read access does not grant the authorization
+required for future write operations on private consumers, such as creating
+branches or pull requests.
+
 ## Target flow
 
 ```text
