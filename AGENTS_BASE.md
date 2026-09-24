@@ -33,6 +33,14 @@ git status --short --branch
   formats, methodologies, or contracts as authoritative. Use reliable evidence,
   state uncertainty, or leave the affected work blocked. An approximation is
   allowed only when explicitly permitted and identified as such.
+- MUST perform a proportionate Research Checkpoint before a material decision
+  depends on unresolved external or runtime uncertainty. Prefer directly
+  relevant authoritative sources, preserve the consequential result in an
+  appropriate reviewable record, and obtain runtime evidence when the claim
+  depends on effective system behavior. A failed operation is not positive
+  evidence that the intended boundary was exercised unless execution is shown
+  to have reached that boundary. Routine work with sufficient local evidence
+  does not trigger this checkpoint.
 - MUST NOT claim a test, validation, or check ran when it did not, or hide a
   failure or blockage behind a fabricated implementation.
 - MUST NOT destroy, overwrite, or rewrite existing work without necessary

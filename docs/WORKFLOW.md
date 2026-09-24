@@ -173,7 +173,51 @@ required by the common operating contract, a blocker report identifies what is
 blocked, why, what was checked, what remains unknown, and what was deliberately
 not modified. Independent work MAY proceed when it remains safe and in scope.
 
-## 9. Validation and completion
+## 9. Research Checkpoint
+
+A Research Checkpoint is required before making a material decision that
+depends on unresolved external or runtime uncertainty. Typical triggers include:
+
+- unexpected or unexplained runtime behavior;
+- a security, authority, isolation, or privilege boundary;
+- current or version-specific behavior of a runtime, API, platform, library, or
+  external service;
+- a consequential workaround for which prior art, an upstream limitation, or a
+  known solution may exist; or
+- an external assumption whose falsity could invalidate the implementation or
+  the evidence offered for it.
+
+The checkpoint is proportional to the uncertainty and the consequence of being
+wrong. Routine work supported by sufficient local evidence does not trigger it.
+When one authoritative source resolves the question adequately, no broader
+survey or additional ceremony is required. The checkpoint is an evidence step,
+not a new human approval gate.
+
+When applicable, prefer sources in this order:
+
+1. the exact relevant version, source code, protocol, or specification;
+2. upstream issues, pull requests, commits, release notes, and official
+   documentation;
+3. applicable standards and established technical literature;
+4. relevant recent research; and
+5. community material as a source of hypotheses, not authority by default.
+
+External documentation and prior art can establish expected behavior or known
+problems, but they do not replace runtime evidence when the requirement being
+demonstrated depends on effective system behavior. Likewise, failure of an
+operation is not positive evidence that the intended boundary was exercised
+unless there is evidence that execution actually reached that boundary.
+
+When the checkpoint materially affects a decision, retain enough information
+in an appropriate durable, reviewable location to reconstruct the reasoning.
+Depending on the project, that may be an issue, pull request, `DECISIONS.md`,
+roadmap, or another suitable versioned source. Useful content includes the
+research question, version or scope, sources inspected, established facts, open
+uncertainties, design impact, and a conclusion such as `NO_CHANGE`,
+`MODIFY_DESIGN`, `NEED_RUNTIME_EVIDENCE`, or `BLOCKED_UPSTREAM`. This is
+conceptual guidance, not a mandatory new document or fixed format.
+
+## 10. Validation and completion
 
 Before completion:
 
@@ -196,7 +240,7 @@ through a pull request. The PR description MUST state the changed normative
 behavior, the impact on consumer repositories, and whether resynchronization is
 required. Distributed rules MUST NOT change silently outside Git history.
 
-## 10. Governance without ceremony
+## 11. Governance without ceremony
 
 Governance exists to reduce repeated mistakes and cognitive load, not to create
 preventive bureaucracy. Prefer not to add documents without useful content,
