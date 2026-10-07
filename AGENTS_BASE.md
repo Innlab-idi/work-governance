@@ -52,6 +52,25 @@ git status --short --branch
   destructive, or irreversible operations.
 - MUST NOT commit credentials, tokens, passwords, keys, secrets, or operational
   or sensitive data that should not be stored in the repository.
+- A multi-step shell procedure for a human operator MUST fail closed when later
+  steps depend on earlier preconditions or perform mutating, privileged, or
+  external operations. Prefer one self-contained script for copy-and-paste or
+  manual execution unless another equally reliable mechanism enforces that
+  property. This does not impose ceremony on trivial, independent inspection
+  commands.
+- Shell exception modes MUST NOT substitute for checking a native process result.
+  When an external executable's success is a precondition, explicitly validate
+  its exit code or status and stop on failure. Direct or automated procedures
+  MUST use available non-interactive tool mechanisms so prompts or pagers cannot
+  accidentally block them.
+- Before a control-flow decision to continue, block, mutate, or retry, normalize
+  and explicitly interpret relevant shell output as a scalar or validated
+  structure. MUST NOT rely on truthiness, implicit coercion, or ambiguous
+  collection cardinality.
+- When a remote write reports success but an immediate metadata read conflicts,
+  treat the state as uncertain or eventually consistent. Revalidate an
+  authoritative state before retrying, compensating, or performing another
+  mutation; MUST NOT blindly repeat the write.
 
 ## Common operating defaults
 

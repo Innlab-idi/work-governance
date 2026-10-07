@@ -156,6 +156,41 @@ are separate concerns. A network or provider failure is an environment
 limitation until independent evidence shows otherwise; it does not by itself
 invalidate a method or implementation.
 
+### Operator shell procedures
+
+A multi-step shell procedure intended for a human operator must fail closed
+when later steps depend on earlier preconditions or include mutating,
+privileged, or external operations. A failure or unmet precondition must stop
+the dependent steps. For instructions intended to be copied, pasted, or run
+manually, prefer one self-contained script unless another mechanism reliably
+provides the same guarantee. This is proportional guidance: trivial,
+independent inspection commands do not need procedural scaffolding.
+
+Shell exception modes can help, but they do not replace an explicit check of a
+native process result. When success from an external executable is required to
+continue, the procedure must inspect and validate its exit code or other
+reported status, then stop on failure.
+
+Procedures intended for direct or automated execution must avoid accidental
+interaction through pagers, prompts, or similar blocking behavior. Use the
+tool's supported non-interactive mechanism when available. For example,
+`git --no-pager` prevents Git from invoking a pager; the general rule applies
+to every applicable tool, not only Git.
+
+Control-flow decisions must not depend on truthiness, implicit coercion, or
+ambiguous cardinality in collections, arrays, JSON, multiline output, or shell
+objects. Normalize relevant output to a scalar value or explicitly interpret
+and validate a structure before deciding to continue, block, mutate, or retry.
+For example, PowerShell procedures should explicitly test the intended value or
+count instead of depending on implicit conversion of command output.
+
+Remote systems may acknowledge a successful write before every metadata read
+reflects it. When an immediate read appears to contradict a successful write,
+treat the result as uncertain or possibly eventually consistent. Revalidate the
+authoritative state before retrying, compensating, or making another mutation;
+do not infer failure or blindly repeat the write. This applies to APIs, Git
+hosting, and other external services.
+
 ## 8. Blockers and ambiguity
 
 The common operating contract requires a blockage rather than fabricated or
