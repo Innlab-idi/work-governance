@@ -50,6 +50,27 @@ git status --short --branch
   production, real data, or external services require both explicit task need
   and sufficient authority. The same applies to comparably privileged,
   destructive, or irreversible operations.
+- The Human/operator authorizes material decisions, not workflow events.
+  Sufficient authority MAY come from an applicable prior explicit material
+  decision, retained as a bounded authorization envelope. Later work MAY inherit
+  it only when its human-owned material requirements remain a faithful subset
+  of that resolved envelope and no invalidator has occurred. Content and bounds
+  govern, not who proposed the work. MUST NOT seek duplicate authorization merely
+  for implementation, publication, review, merge, or task closure already covered.
+- Inherited authority MUST NOT cover unresolved material choices or survive
+  invalidators: material objective, scope, authority, or privilege expansion;
+  a new repository/system surface with material consequences; production or
+  real/private-data interaction; credential access; destructive/irreversible
+  risk; or material architecture, runtime, compatibility, or security-boundary
+  changes not already covered. Other invalidators include increasing a consumed
+  attempt/retry budget, retrying a genuinely uncertain mutation without resolved
+  retry authority, conflicts with multiple materially plausible resolutions,
+  a later contradictory human decision, or another unresolved material choice.
+  Material consequences already explicitly covered need no duplicate decision;
+  later contradictory human decisions supersede prior authority. Unresolved
+  material choices require human escalation. Review MAY verify existing authority
+  or identify a gap; neither review nor implementation capability creates or
+  enlarges human-owned authority.
 - MUST NOT commit credentials, tokens, passwords, keys, secrets, or operational
   or sensitive data that should not be stored in the repository.
 - A multi-step shell procedure for a human operator MUST fail closed when later
@@ -67,13 +88,24 @@ git status --short --branch
   and explicitly interpret relevant shell output as a scalar or validated
   structure. MUST NOT rely on truthiness, implicit coercion, or ambiguous
   collection cardinality.
-- When a remote write reports success but an immediate metadata read conflicts,
-  treat the state as uncertain or eventually consistent. Revalidate an
-  authoritative state before retrying, compensating, or performing another
-  mutation; MUST NOT blindly repeat the write.
+- Tool, process, network, or hosting failures and apparently contradictory reads
+  require exact reconciliation against authoritative state before continuation,
+  compensation, or retry. This includes successful remote writes followed by
+  conflicting metadata reads or eventual consistency. MUST NOT blindly repeat
+  an uncertain mutation. When observation establishes what happened and one safe
+  continuation within existing authority, continue from that state; an
+  operational stop alone MUST NOT trigger duplicate human authorization.
 
 ## Common operating defaults
 
+- Explicit approval of an entire task, checkpoint, or phase SHOULD ordinarily
+  cover its bounded repository completion unless the Human/operator narrows it:
+  in-scope implementation, relevant checks, ordinary non-force publication, PR
+  creation/update, independent review, deterministic non-semantic reconciliation,
+  ordinary authorized merge, and durable evidence/task closure, as applicable.
+  This is not standing authority for future work and MUST NOT silently authorize
+  any material choice or operation outside the resolved envelope. Applicable
+  safeguards and stricter project constraints still apply.
 - Existing work state takes priority over the convenience of starting from
   the published baseline. When instructed to continue an identified branch or
   pull request, MUST continue that state; MUST NOT reconstruct it on another
