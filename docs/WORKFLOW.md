@@ -35,6 +35,75 @@ state.
 This distinction preserves both a stable shared baseline and unfinished work
 that has already acquired an explicit review boundary.
 
+### Material decisions and durable authority
+
+The Human/operator authorizes material decisions, not workflow events. Separate
+ownership of a material decision from whether it remains unresolved and from the
+workflow events that execute it. A human-owned choice can already be resolved;
+implementation, publication, review, merge, issue closure, or another mechanical
+boundary does not by itself reopen it.
+
+An explicit human/operator material decision may remain applicable beyond its
+original conversation, task event, or workflow boundary. Treat it as a bounded
+authorization envelope. Later work may inherit that authority when all of its
+human-owned material requirements are a faithful subset of the resolved envelope
+and no invalidator has occurred. Recover the decision, its bounds, and any later
+changes from available evidence; do not invent missing authorization.
+
+Content and bounds govern. Agent-proposed work may faithfully materialize a
+prior human resolution. Human-proposed work does not authorize arbitrary later
+expansion. Task provenance or authorship alone is insufficient evidence of the
+needed authority. Technical capability likewise remains distinct from authority.
+
+### Default bounded completion
+
+When the Human/operator explicitly approves an entire task, checkpoint, or phase
+without narrowing completion authority, that decision should ordinarily cover
+the bounded repository lifecycle necessary to complete it, as applicable:
+
+- implementation inside the approved scope and relevant checks;
+- ordinary non-force publication and PR creation/update;
+- independent review and deterministic non-semantic reconciliation;
+- ordinary authorized merge; and
+- durable evidence and task/issue closure.
+
+This default remains subject to the mandatory baseline and stricter project
+constraints. Explicit limits govern: for example, an instruction to leave a PR
+unmerged excludes merge from the envelope. Completion authority is not blanket
+standing authority for arbitrary future work. It does not silently authorize
+material scope or objective expansion, production effects, real/private-data
+exposure, credentials, new privilege, destructive or irreversible operations,
+force pushes or history rewrites, new security/containment boundaries, materially
+new architecture/runtime decisions, extra attempts after a bounded limit is
+consumed, or other material choices outside the resolved decision. Such work
+requires sufficient explicit authority covering those consequences.
+
+### Invalidators and unresolved material choices
+
+Inherited authority ceases to be sufficient when safe continuation needs a
+material choice not already covered. Check for:
+
+- material objective or scope expansion;
+- authority or privilege expansion;
+- a new repository or system surface with material consequences;
+- production or real/private-data interaction, exposure, or credential access;
+- destructive or irreversible risk;
+- material architecture, runtime, compatibility, or security/containment-boundary
+  changes not already covered;
+- an increase in the attempt/retry budget after a defined limit is consumed;
+- retry of a mutation whose outcome remains genuinely uncertain and whose retry
+  authority was not already resolved;
+- a conflict with multiple materially plausible resolutions;
+- a later contradictory human decision; or
+- another genuinely unresolved material decision.
+
+Escalate to the Human/operator when a material choice remains unresolved or prior
+authority has been exceeded or invalidated. Ordinary implementation defects,
+naming, local organization, test organization, deterministic representation
+fixes, exact state reconciliation, and routine mechanical completion do not
+in themselves create new human decisions. If fixing a defect does require an
+uncovered material choice, escalate that choice rather than the workflow event.
+
 ## 2. Recover context before acting
 
 A new conversation or agent SHOULD be able to recover the relevant state from
@@ -58,16 +127,20 @@ in the repository.
 
 ## 3. Collaboration roles
 
-- **Human/operator:** owns intent and authorization, selects priorities,
-  supplies unavailable business or domain context, and owns or delegates merge
-  authorization for consequential changes.
+- **Human/operator:** owns intent and material authorization, selects priorities,
+  supplies unavailable business or domain context, and resolves material choices
+  outside existing authority. May authorize bounded completion, including merge,
+  in advance or expressly narrow that authority.
 - **Reviewer/planning agent:** reconstructs project state, helps scope work,
   prepares self-contained task instructions when useful, reviews changes
   against repository authority, and identifies regressions, contradictions,
-  and useful next milestones.
+  and useful next milestones. May verify that work fits an existing decision or
+  identify an authority gap; review does not create, enlarge, or substitute for
+  human-owned authority.
 - **Implementation agent:** inspects state, implements within scope, validates,
   updates required documentation, reports accurately, and stops at genuine
-  blockers or authority gaps.
+  blockers or authority gaps. May inherit applicable resolved authority but
+  cannot enlarge it through implementation capability or scope changes.
 - **GitHub/version control:** provides the persistent, reviewable record of
   project state; pull requests provide explicit review boundaries for
   consequential changes.
@@ -86,7 +159,10 @@ current-state review -> scoped task -> implementation -> validation -> PR
 
 The reviewer evaluates the result against authoritative repository state and
 requests only corrections relevant to the task. This is a useful default, not
-mandatory ceremony for every trivial edit.
+mandatory ceremony for every trivial edit. Each stage executes within applicable
+authority; reaching a commit, publication, PR update, completed review, merge, or
+closure does not itself require the same human decision again. Review still
+checks compliance and correctness, and does not supply missing authorization.
 
 ## 5. Task and pull-request boundaries
 
@@ -191,6 +267,19 @@ authoritative state before retrying, compensating, or making another mutation;
 do not infer failure or blindly repeat the write. This applies to APIs, Git
 hosting, and other external services.
 
+A tool, process, network, or hosting failure is an operational condition, not a
+new grant of authority or automatically a new human decision. Before continuing,
+compensating, or retrying, reconcile exactly what happened against authoritative
+observations. If they establish the outcome and a unique safe continuation
+within existing authority, continue from the observed state. Never blindly
+repeat an uncertain mutation. If the outcome remains genuinely uncertain, do
+not retry without sufficient resolved retry authority; report the operational
+blockage when evidence is unavailable. Escalate to the Human/operator only when
+resolution itself requires a new material choice or new authority, such as an
+uncovered uncertain retry, a consumed retry-budget increase, or multiple
+materially plausible conflict resolutions. An operational stop does not reset
+an attempt budget or create authority.
+
 ## 8. Blockers and ambiguity
 
 The common operating contract requires a blockage rather than fabricated or
@@ -202,6 +291,13 @@ unauthorized work. Conditions that warrant such a report include:
 - ambiguity would change a frozen decision;
 - exact required behavior would be replaced by an invented approximation; or
 - the scope would need material expansion.
+
+Human escalation has a high threshold: a genuinely unresolved material choice,
+exceeded authority, or an invalidator described in section 1. Starting
+implementation, making a commit, publishing, creating/updating a PR, completing
+review, merging, closing a task, or reconciling an operational stop with one safe
+authorized continuation is not by itself such a choice. Missing operational
+evidence may block the affected action without needing a new human decision.
 
 Minor ambiguity that existing rules resolve safely need not block work. As
 required by the common operating contract, a blocker report identifies what is
