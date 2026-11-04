@@ -45,6 +45,22 @@ git status --short --branch
   failure or blockage behind a fabricated implementation.
 - MUST NOT destroy, overwrite, or rewrite existing work without necessary
   authority. Inspect what would be lost before a destructive operation.
+- MUST use the existing checkout and directory layout by default, changing
+  branches when appropriate and safe. Before creating any additional directory
+  outside the repository, MUST determine whether an existing checkout, branch,
+  or provisioned workspace can safely complete the task. MUST NOT create sibling
+  clones, Git worktrees, temporary project trees, or persistent workspace roots
+  merely for convenience, routine branch isolation, or as an unexamined default.
+  An exception MAY be used only when a concrete technical constraint makes
+  separation strictly necessary: mandatory isolation or sandboxing, security
+  containment, an explicit worktree-only role constraint, a tool-enforced path
+  policy, or genuinely concurrent independent work that cannot safely share a
+  checkout. Before creating it, MUST state the constraint, intended location,
+  ownership, evidence to retain, and a safe end-of-task removal procedure.
+  MUST NOT automatically delete work unless reconciled or confirmed expendable.
+  MUST use only the minimum necessary exception and MUST NOT weaken authority,
+  security, role separation, worker isolation, or attempt/retry limits to avoid
+  an extra directory.
 - Technical capability is not authorization. Force pushes, history rewrites,
   branch deletion, PR merges, repository-policy changes, and operations on
   production, real data, or external services require both explicit task need
