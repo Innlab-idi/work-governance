@@ -232,6 +232,32 @@ are separate concerns. A network or provider failure is an environment
 limitation until independent evidence shows otherwise; it does not by itself
 invalidate a method or implementation.
 
+### Reuse the existing workspace
+
+Use the existing checkout and directory layout by default, switching branches
+when appropriate after checking work state and continuity. First assess whether
+an existing checkout, branch, or provisioned workspace can safely do the work.
+Convenience, routine branch isolation, and a habitual preference for fresh
+working directories do not justify sibling clones, Git worktrees, temporary
+project trees, or additional persistent workspace roots outside the repository.
+
+The mandatory baseline permits only the minimum separation made strictly
+necessary by a concrete technical constraint. Examples include required sandbox
+or security containment, an explicit worktree-only role, a tool-enforced path
+policy, or independent concurrent work that cannot safely share a checkout.
+A separate branch alone is sufficient for ordinary sequential work; concurrent
+work justifies separation only when sharing the checkout would be unsafe.
+
+Before creating an exception, state why existing locations cannot suffice,
+where it will live, who owns it, what evidence must be retained, and how it will
+be safely removed at task completion. Record this in the existing task or PR
+context; no separate form or approval gate is introduced. Before removal,
+inspect for outstanding work and preserve required evidence. Do not automatically
+delete work unless it has been reconciled or confirmed expendable. Directory
+minimization does not relax authority, sandbox, security, HOST/WORKER separation,
+worker isolation, or attempt/retry limits, including an existing SELFHOST budget.
+When such constraints require separation, use the justified minimum exception.
+
 ### Operator shell procedures
 
 A multi-step shell procedure intended for a human operator must fail closed
