@@ -168,3 +168,20 @@ The consumer repository owns everything outside the managed markers.
 
 - Add project-specific test, lint, build, or documentation commands here when
   they exist.
+
+### Optional manual GitHub collaboration (disabled by default)
+
+<!--
+This section is guidance for an explicit local opt-in, not an active grant.
+If the repository adopts the optional mode in work-governance
+docs/WORKFLOW.md, replace this comment with locally normative instructions
+that identify:
+- the authoritative local queue/issues and current task-selection rules;
+- which implementation agent may commit, push and open/update PRs;
+- which independent reviewer may review and ordinarily merge authorized PRs;
+- how a short request triggers context recovery rather than creating authority;
+- how in-flight PR and queue state are reconciled before switching modes; and
+- any stricter security, credential, production or automation boundaries.
+Do not opt in automatically, or enable concurrent manual and automated
+mutation of one in-progress task.
+-->
