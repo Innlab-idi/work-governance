@@ -164,6 +164,58 @@ authority; reaching a commit, publication, PR update, completed review, merge, o
 closure does not itself require the same human decision again. Review still
 checks compliance and correctness, and does not supply missing authorization.
 
+### Optional human-triggered GitHub collaboration
+
+A consumer repository MAY explicitly opt into a manual, GitHub-mediated
+collaboration mode through its own project-owned normative instructions. This
+is an operating mode for the existing collaboration loop, not a second
+execution architecture, a new authority source, or an implicit delegation
+created by installing a tool. It is not enabled automatically for consumers
+or for execution systems with stricter local actor boundaries.
+
+In an opted-in repository, short human requests such as "check for pending
+work" and "review ready work" can initiate separate implementation and review
+sessions. Those requests trigger context recovery from local `AGENTS.md`,
+relevant versioned project/decision/queue documents, Git state, and GitHub
+issues and PRs. They do not themselves authorize new material choices. Keep
+the approved task scope, relevant human decisions, checks, results, and review
+outcome in the existing durable repository records. No manual transfer of
+prompts, diffs, or test logs between agents should be required when both can
+read those records.
+
+- **Human/operator:** selects priorities and resolves material choices, and
+  explicitly authorizes a bounded task or phase when required. The human
+  invokes each implementation or review session; no background wake is implied.
+- **Implementation agent:** on invocation, identifies existing in-progress
+  work first, or one eligible task within its recorded authority and
+  dependencies. It reads the actual repository state, implements and checks
+  only the authorized scope, and may make ordinary commits, non-force pushes,
+  and create/update a PR when local policy delegates those operations and the
+  environment permits them. It does not approve or merge its own work.
+- **Independent reviewer:** on invocation, finds review-ready PRs, reads the
+  actual changes, required check evidence, task scope, and exact current
+  revision, and either requests specific rework or publishes a review decision.
+  It may perform an ordinary authorized merge and reconcile the durable
+  task/queue state if the applicable human authorization and local policy
+  cover that completion. Mere GitHub access is never approval authority.
+- **No eligible action:** report the actual blocker or lack of authorized
+  work without inventing a checkpoint, changing task meaning, or treating an
+  operational failure as a human decision.
+
+The repository's established branches, PRs, decisions, queue or issues, and
+checks remain the only handoff mechanism. This mode adds no separate task
+schema, work queue, coordinator, launcher, credential channel, or scheduler.
+Preserve branch/PR continuity and reconcile any uncertain remote mutation
+before continuing. Do not let manual and automated actors simultaneously
+mutate or close the same in-progress task. Switching a consumer to an
+automation-specific operating mode requires an explicit handoff of current
+PR/queue state and compliance with that mode's local authority and isolation
+rules; it is not an automatic transfer of permissions.
+
+This optional workflow cannot weaken the mandatory baseline or override
+stricter repository-specific roles, containment, publication, or finalization
+constraints. Projects that do not opt in are unchanged.
+
 ## 5. Task and pull-request boundaries
 
 A PR should normally contain one coherent principal technical, architectural,
