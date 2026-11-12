@@ -151,14 +151,15 @@ them or silently destroy local rules.
 ### Optional worker handoff
 
 When this repository opts in to `WORKER-HANDOFF-01`, local instructions MUST
-name its one dedicated technical GitHub issue. That issue uses append-only,
-complete snapshots with `CURRENT` and a newest-first `RECENT` section of no more
-than ten executions. Every worker result, including `NO_OP`, publishes a new
-snapshot with an execution ID, UTC timestamps, status, brief public-safe
-summary, and verifiable references where available. Workers never overwrite
-comments: they read the accepted revision, publish its one-child successor, and
-re-read to detect a concurrent or stale result. A conflict or uncertain result
-stops publication for reconciliation rather than choosing a winner.
+name its one dedicated technical GitHub issue. Its body holds one complete,
+bounded snapshot with `CURRENT` and a newest-first `RECENT` section of no more
+than ten executions. Every worker result, including `NO_OP`, updates that body
+with an execution ID, UTC timestamps, status, brief public-safe summary, and
+verifiable references where available. GitHub issue-body writes have no CAS:
+local instructions MUST establish exactly one strictly serialized publisher; a
+read/write/readback sequence alone does not make concurrent writers safe.
+Malformed, stale, conflicting, or uncertain publication stops for
+reconciliation rather than selecting a winner.
 
 An AI SUPERVISOR reads the accepted handoff first and independently verifies
 repository and GitHub state afterward. The handoff is informative only; it
@@ -187,3 +188,20 @@ The consumer repository owns everything outside the managed markers.
 
 - Add project-specific test, lint, build, or documentation commands here when
   they exist.
+
+### Optional manual GitHub collaboration (disabled by default)
+
+<!--
+This section is guidance for an explicit local opt-in, not an active grant.
+If the repository adopts the optional mode in work-governance
+docs/WORKFLOW.md, replace this comment with locally normative instructions
+that identify:
+- the authoritative local queue/issues and current task-selection rules;
+- which implementation agent may commit, push and open/update PRs;
+- which independent reviewer may review and ordinarily merge authorized PRs;
+- how a short request triggers context recovery rather than creating authority;
+- how in-flight PR and queue state are reconciled before switching modes; and
+- any stricter security, credential, production or automation boundaries.
+Do not opt in automatically, or enable concurrent manual and automated
+mutation of one in-progress task.
+-->
