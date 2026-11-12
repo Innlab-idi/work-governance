@@ -11,11 +11,13 @@ authority. The Human/operator retains every material authorization.
 ## Central registry
 
 Each repository that opts in MUST have exactly one dedicated technical GitHub
-issue, named in its local instructions, for this protocol. The issue **body** is
-the central registry and contains one bounded snapshot only. Comments are not a
-handoff history and workers MUST NOT use them to publish executions. The body
-MUST identify the protocol and link to this document. It MUST NOT contain real
-data, credentials, or sensitive operational detail.
+issue, named in its local instructions, for this protocol. The local instructions
+MUST identify the protocol and link to this document. The issue **body** is the
+central registry and contains one bounded snapshot only, exactly in the format
+rendered and parsed by `handoff/registry.py`; it carries no additional protocol
+link or metadata. Comments are not a handoff history and workers MUST NOT use
+them to publish executions. The body MUST NOT contain real data, credentials, or
+sensitive operational detail.
 
 The registry is initialized at revision `0` using the format below, with
 `No accepted execution yet.` in both sections. Every accepted execution replaces
@@ -110,6 +112,7 @@ or could not be resolved, and it must not infer a result from missing data.
 ## Consumer adoption
 
 This is a new shared normative contract. A consumer that adopts it must name
-its dedicated registry issue in local instructions and synchronize the managed
-governance block at the adopted revision. Consumers that have not opted in do
-not have a registry and continue their existing workflow.
+its dedicated registry issue, identify this protocol, and link to this document
+in local instructions, then synchronize the managed governance block at the
+adopted revision. Consumers that have not opted in do not have a registry and
+continue their existing workflow.
