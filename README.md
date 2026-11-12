@@ -28,6 +28,7 @@ documentation is not an exception.
 - [`AGENTS_BASE.md`](AGENTS_BASE.md): compact common operating rules.
 - [`docs/WORKFLOW.md`](docs/WORKFLOW.md): the shared development process.
 - [`docs/DOCUMENTATION.md`](docs/DOCUMENTATION.md): documentation semantics and ownership.
+- [`docs/WORKER_HANDOFF.md`](docs/WORKER_HANDOFF.md): optional worker-to-supervisor handoff protocol.
 - [`templates/`](templates/): lightweight starting documents for consumers.
 - [`sync/README.md`](sync/README.md): the intended future synchronization contract.
 
