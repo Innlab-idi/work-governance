@@ -12,7 +12,8 @@ and scope within applicable rules; it does not override the mandatory baseline.
 It may satisfy only a condition or authorization that a rule expressly
 contemplates. Follow the expanded process in
 [`docs/WORKFLOW.md`](docs/WORKFLOW.md) and the document semantics in
-[`docs/DOCUMENTATION.md`](docs/DOCUMENTATION.md).
+[`docs/DOCUMENTATION.md`](docs/DOCUMENTATION.md). When a repository opts in to
+worker handoffs, follow [`docs/WORKER_HANDOFF.md`](docs/WORKER_HANDOFF.md).
 
 ## Before changing files
 

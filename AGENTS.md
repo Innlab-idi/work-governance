@@ -4,9 +4,9 @@ Status: normative
 Scope: repository
 
 Before changing shared governance, read `AGENTS_BASE.md`, `docs/WORKFLOW.md`,
-and `docs/DOCUMENTATION.md` in full. `AGENTS_BASE.md` remains the canonical
-source of the common baseline; this file governs development of this repository
-and is not projected into consumer repositories.
+`docs/DOCUMENTATION.md`, and `docs/WORKER_HANDOFF.md` in full. `AGENTS_BASE.md`
+remains the canonical source of the common baseline; this file governs
+development of this repository and is not projected into consumer repositories.
 
 - Treat this repository and all versioned content and GitHub metadata as
   public, including branch names, commit messages, PR descriptions, and PR

@@ -164,6 +164,18 @@ authority; reaching a commit, publication, PR update, completed review, merge, o
 closure does not itself require the same human decision again. Review still
 checks compliance and correctness, and does not supply missing authorization.
 
+### Optional worker-to-supervisor handoff
+
+When a repository has explicitly adopted `WORKER-HANDOFF-01`, a CODEX WORKER
+publishes its execution result using the central registry before its concise
+response to the Human/operator. An AI SUPERVISOR reads that informative handoff
+first, then verifies the real repository and GitHub state independently. The
+handoff never supplies execution, approval, or merge authority and an
+unavailable handoff does not prevent normal review; the supervisor records that
+limitation. The exact bounded GitHub-issue-body format, serialization
+precondition, and failure protocol are normative in
+[`docs/WORKER_HANDOFF.md`](WORKER_HANDOFF.md).
+
 ### Optional human-triggered GitHub collaboration
 
 A consumer repository MAY explicitly opt into a manual, GitHub-mediated

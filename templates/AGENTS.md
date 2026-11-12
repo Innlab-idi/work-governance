@@ -147,6 +147,26 @@ exception. Unadopted template text is only a default.
 The content between the governance markers is managed. A future synchronizer
 MAY replace only content between those markers. It MUST NOT edit content outside
 them or silently destroy local rules.
+
+### Optional worker handoff
+
+When this repository opts in to `WORKER-HANDOFF-01`, local instructions MUST
+name its one dedicated technical GitHub issue. Its body holds one complete,
+bounded snapshot with `CURRENT` and a newest-first `RECENT` section of no more
+than ten executions. Every worker result, including `NO_OP`, updates that body
+with an execution ID, UTC timestamps, status, brief public-safe summary, and
+verifiable references where available. GitHub issue-body writes have no CAS:
+local instructions MUST establish exactly one strictly serialized publisher; a
+read/write/readback sequence alone does not make concurrent writers safe.
+Malformed, stale, conflicting, or uncertain publication stops for
+reconciliation rather than selecting a winner.
+
+An AI SUPERVISOR reads the accepted handoff first and independently verifies
+repository and GitHub state afterward. The handoff is informative only; it
+never grants authority to execute, approve, or merge. An unavailable handoff
+does not block normal supervisor verification, but the limitation must be
+stated. The adopted source's `docs/WORKER_HANDOFF.md` defines the complete
+format and protocol.
 <!-- GOVERNANCE:END -->
 
 ## Project-specific instructions
