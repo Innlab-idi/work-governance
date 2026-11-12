@@ -19,8 +19,9 @@ link or metadata. Comments are not a handoff history and workers MUST NOT use
 them to publish executions. The body MUST NOT contain real data, credentials, or
 sensitive operational detail.
 
-The registry is initialized at revision `0` using the format below, with
-`No accepted execution yet.` in both sections. Every accepted execution replaces
+The registry is initialized at revision `0` using the format below: `CURRENT`
+contains `No accepted execution yet.` and `RECENT` contains `No accepted
+executions yet.` Every accepted execution replaces
 the body with the next complete snapshot. Thus the persistent registry contains
 one `CURRENT` and at most ten `RECENT` executions, rather than an unbounded
 issue-comment history.
