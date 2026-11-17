@@ -164,6 +164,51 @@ authority; reaching a commit, publication, PR update, completed review, merge, o
 closure does not itself require the same human decision again. Review still
 checks compliance and correctness, and does not supply missing authorization.
 
+### Empirical-first development
+
+Prefer an early functional MVP that delivers real partial value, followed by
+small executable increments. This default applies across development of tools,
+consumer projects, and CODEX WORKER sessions in manual mode. Under technical
+uncertainty, prefer the smallest safe experiment that can answer a concrete
+question within existing authority:
+
+```text
+concrete hypothesis -> minimal executable implementation -> observed test
+-> recorded learning -> correction or extension
+```
+
+For a manual session or script, define the expected observation, run a bounded
+real test, and inspect the result. Enable verbose output or focused diagnostics
+when useful to locate the failing step and establish how far execution reached,
+without exposing secrets or sensitive data. Record consequential learning in
+the existing task, PR, or appropriate versioned source; no new document or
+fixed experiment format is required. A failure before the intended boundary
+does not demonstrate that the boundary was exercised.
+
+Scale investigation, validation, and robustness to the consequences of failure.
+Supervised, reversible experiments usually need less ceremony than unattended
+execution, which warrants stronger containment, diagnostics, and failure
+handling. Prefer functional milestones over speculative layers, duplicated
+documentation, or preventive gates without a concrete risk or requirement.
+This preference does not require experiments when sufficient evidence exists.
+
+The proportionate Research Checkpoint in section 9 still applies before a
+material decision relies on unresolved uncertainty. A safe bounded experiment
+can supply its runtime evidence; research should resolve the relevant question
+and enable execution rather than substitute for it. Empirical-first grants no
+new authority for production, credentials, real/private data, or irreversible
+operations. Mandatory authority, secret/data protection, isolation, fail-closed
+execution, reconciliation of uncertain mutations, attempt/retry limits, and
+independent review remain intact.
+
+Consumers receive this default when they explicitly adopt the new source
+revision. Using the existing manual synchronization process described in
+[`sync/README.md`](../sync/README.md), update the managed `AGENTS.md` block from
+the canonical contract, record the adopted revision, preserve local instructions,
+and review the Git diff through a consumer PR. Consumers may retain their
+current revision until adoption; this change enables no capabilities, access,
+automation, or optional collaboration mode automatically.
+
 ### Optional worker-to-supervisor handoff
 
 When a repository has explicitly adopted `WORKER-HANDOFF-01`, a CODEX WORKER
