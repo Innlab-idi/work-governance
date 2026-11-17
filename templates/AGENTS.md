@@ -101,6 +101,14 @@ expressly contemplates.
 
 ### Common operating defaults
 
+- SHOULD favor empirical-first development across implementation work: deliver
+  an early functional MVP with real partial value and resolve technical
+  uncertainty through the smallest safe executable experiment. Prefer concrete
+  hypothesis -> minimal implementation -> observed test -> recorded learning ->
+  correction or extension. Use useful diagnostics and keep research,
+  documentation, and robustness proportional to risk; avoid speculative layers
+  and gates without a concrete need. This default does not weaken the mandatory
+  baseline, required checks, independent review, or stricter project constraints.
 - Explicit approval of an entire task, checkpoint, or phase SHOULD ordinarily
   cover its bounded repository completion unless the Human/operator narrows it:
   in-scope implementation, relevant checks, ordinary non-force publication, PR
